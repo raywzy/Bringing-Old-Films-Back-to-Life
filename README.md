@@ -48,7 +48,7 @@ pages={2747--2757},
 year={2020}
 }
 ```
-Powerful [Image Completion Transformer](https://github.com/raywzy/ICT) (ICT), which could effectively recover the missing regions.
+Powerful [Image Completion Transformer](https://github.com/raywzy/ICT) (ICT), which could effectively recover the masked regions.
 ```bibtex
 @article{wan2021high,
   title={High-Fidelity Pluralistic Image Completion with Transformers},
