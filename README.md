@@ -17,15 +17,36 @@ https://user-images.githubusercontent.com/5800781/160990475-da5eff1d-adfe-47c6-a
 ## :star2: Pipeline
 <img src='assets/Pipeline.png'/>
 
+## Requirements
+
+Please install the dependencies according to ```environment.yml```.
+
+## Usage
+
+Clone the repository
+```
+git clone https://github.com/raywzy/Bringing-Old-Films-Back-to-Life.git
+```
+
+Download the relabled scratch templates for the video degradation model. [Download](https://portland-my.sharepoint.com/:u:/g/personal/ziyuwan2-c_my_cityu_edu_hk/EcB_8dZTgW1HsdAIOMtuz4QBLxk93oEWorHpcMC9KNy0Aw?e=mRXTbW)
+
+REDS dataset could be directly downloaded from [Link](https://seungjunnah.github.io/Datasets/reds.html).
+
+To train a model, remember to modify the config file following the example ```config_example/config.yaml```.
+
+> *NOTE*: 
+>  Modify both "train.dataroot_gt" and "train.dataroot_lq" into the path of clean training frame since the degradation is generated on-the-fly.
+>  Modify "val.dataroot_gt" and "val.dataroot_lq" to the path of validation video clips.
+>  Set "texture_template" to the path where you download the scratch templates.
+
+Then you could run
+```
+CUDA_VISIBLE_DEVICES=0 python VP_code/main_gan.py --name RNN_Swin_4 --model_name RNN_Swin_4 --epoch 20 --nodes 1 --gpus 1 --discriminator_name discriminator_v2 --which_gan hinge
+```
+
+You could enable "--fix_flow_estimator" which freezes the flow-estimation network to make the training more stable.
 
 
-
-
-## :hourglass_flowing_sand: To Do
-- [ ] Release training code
-- [ ] Release testing code
-- [ ] Release pre-trained models
-- [ ] Add Google Colab
 
 ## :notebook_with_decorative_cover: Citation
 

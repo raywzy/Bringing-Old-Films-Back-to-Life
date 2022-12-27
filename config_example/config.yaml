@@ -1,0 +1,92 @@
+seed: 2021
+distributed: True
+train_visualization_iter: 1000
+
+datasets:
+  train:
+    name: REDS
+    type: Film_dataset_1
+    dataroot_gt: /home/wanziyu/workspace/project/Video_Process/REDS/train/train_sharp
+    dataroot_lq: /home/wanziyu/workspace/project/Video_Process/REDS/train/train_sharp
+    # val_partition: REDS4  # set to 'official' when use the official validation partition
+    # io_backend:
+    #   type: disk
+
+    is_train: true
+    num_frame: 7
+    gt_size: [256,256]
+    scale: 1
+    interval_list: [1,2]
+    random_reverse: false
+    use_flip: true
+    use_rot: true
+
+    # data loader
+    use_shuffle: true
+    num_worker_per_gpu: 20
+    batch_size_per_gpu: 1
+    # dataset_enlarge_ratio: 200
+    # prefetch_mode: ~
+    # pin_memory: true
+
+    normalizing: true
+    texture_template: ./noise_data
+  val:
+    name: REDS4
+    type: Film_dataset_1
+    dataroot_gt: /home/wanziyu/workspace/datasets/Old_Film/video_clips/CHRISTMAS_1932
+    dataroot_lq: /home/wanziyu/workspace/datasets/Old_Film/video_clips/CHRISTMAS_1932
+    # meta_info_file: basicsr/data/meta_info/meta_info_REDS_GT.txt
+    val_partition: REDS4  # set to 'official' when use the official validation partition
+
+    is_train: false
+    num_frame: 10
+    gt_size: [640,368]
+    scale: 1
+    interval_list: [1]
+    random_reverse: false
+    use_flip: false
+    use_rot: false
+
+    normalizing: true
+    texture_template: ./noise_data
+
+path:
+  pretrain_network_g: ~
+  strict_load_g: false
+  resume_state: ~
+
+trainer:
+  lr: 0.0002
+  flow_lr_mul: 0.125
+  gan_lr: 0.0002
+  beta1: 0.9
+  beta2: 0.99
+
+  G_adv_loss_weight: 0.01
+  D_adv_loss_weight: 1.0
+  pix_loss_weight: 1.0
+  perceptual_loss_weight: 1.0
+
+  nepoch_steady: 10
+  nepoch_decay: 10
+
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 5e3
+  use_tb_logger: false
+
+val:
+  val_freq: !!float 1e4
+  val_frame_num: 15
+  save_img: true
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      # crop_border: 0
+      # test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      # crop_border: 0
+      # test_y_channel: false
