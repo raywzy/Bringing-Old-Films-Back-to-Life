@@ -36,7 +36,9 @@ To train a model, remember to modify the config file following the example ```co
 
 > *NOTE*: 
 >  Modify both "train.dataroot_gt" and "train.dataroot_lq" into the path of clean training frame since the degradation is generated on-the-fly.
+>
 >  Modify "val.dataroot_gt" and "val.dataroot_lq" to the path of validation video clips.
+>
 >  Set "texture_template" to the path where you download the scratch templates.
 
 Then you could run
