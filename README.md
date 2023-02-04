@@ -77,7 +77,7 @@ CUDA_VISIBLE_DEVICES=0 python VP_code/test.py --name RNN_Swin_4 --model_name RNN
 ```
 The restored results could be found in ```./OUTPUT``` folder.
 
-Note:
+**Note**:
 Currently the model is only trained on REDS dataset then the learned texture information will be limited, to obtain better generalization performance please consider training the model on more diverse videos. 
 
 ## :notebook_with_decorative_cover: Citation
