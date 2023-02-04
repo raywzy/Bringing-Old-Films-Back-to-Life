@@ -32,6 +32,14 @@ Download the relabled scratch templates for the video degradation model. [Downlo
 
 REDS dataset could be directly downloaded from [Link](https://seungjunnah.github.io/Datasets/reds.html).
 
+Create a folder ```./pretrained_models```
+```
+mkdir pretrained_models
+```
+Put the optical flow estimation model weights ```raft-sintel.pth``` in ```./pretrained_models```, which could be downloaded [here](https://drive.google.com/drive/folders/1sWDsfuZ3Up38EUQt7-JDTT1HcGHuJgvT).
+
+### Train
+
 To train a model, remember to modify the config file following the example ```config_example/config.yaml```.
 
 > *NOTE*: 
@@ -48,7 +56,26 @@ CUDA_VISIBLE_DEVICES=0 python VP_code/main_gan.py --name RNN_Swin_4 --model_name
 
 You could enable "--fix_flow_estimator" which freezes the flow-estimation network to make the training more stable.
 
+### Test
 
+We provide the [pre-trained models](https://portland-my.sharepoint.com/:u:/g/personal/ziyuwan2-c_my_cityu_edu_hk/ERA9GJT06j9ClUJWSnDjOToBn62dJUxCdd8Jkminc47Ghw?e=TJjwJ5) and some testing old films in ```./test_data```.
+
+If you'd like to directly use the provided model weights, please create a folder ```./OUTPUT```:
+```
+mkdir OUTPUT
+```
+Put ```RNN_Swin_4.zip``` in the ```./OUTPUT``` folder, then unzip it by
+```
+unzip RNN_Swin_4.zip
+```
+To restore the old films, please run
+```
+CUDA_VISIBLE_DEVICES=0 python VP_code/test.py --name RNN_Swin_4 --model_name RNN_Swin_4 \
+                                              --which_iter 200000 --temporal_length 20 --temporal_stride 10 \
+                                              --input_video_url your_path/./test_data \
+                                              --gt_video_url your_path/./test_data
+```
+The restored results could be found in ```./OUTPUT``` folder.
 
 ## :notebook_with_decorative_cover: Citation
 
