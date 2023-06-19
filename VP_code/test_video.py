@@ -119,4 +119,4 @@ if __name__ == '__main__' :
 
     for id, sr_img in tqdm(enumerate(sr_imgs)) :
         os.makedirs(save_dir, exist_ok=True)
-        cv2.imwrite(os.path.join(save_dir, str(id)+zfill(5) + '.png'))
+        cv2.imwrite(os.path.join(save_dir, str(id).zfill(5) + '.png'))
